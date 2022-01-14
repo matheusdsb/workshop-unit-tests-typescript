@@ -15,14 +15,18 @@ export class UsersController {
 
   @Get('import-from-github')
   async importFromGithub(
-    @Query('idGreaterThan') idGreaterThan: number,
+    @Query('numberOfItems') numberOfItems: number,
     @Query('onlyAdmins') onlyAdmins: string,
     @Query('onlyWithAvatar') onlyWithAvatar: string,
+    @Query('loginStartsWith') loginStartsWith: string,
   ) {
-    return await this.githubUserService.import(
-      onlyAdmins === 'true' ? true : false,
-      onlyWithAvatar === 'true' ? true : false,
-      isNaN(idGreaterThan) ? 0 : Number(idGreaterThan),
+    return await this.githubUserService.populate(
+      {
+        onlyAdmins: onlyAdmins === 'true' ? true : false,
+        onlyWithAvatar: onlyWithAvatar === 'true' ? true : false,
+        loginStartsWith,
+      },
+      isNaN(numberOfItems) ? 10 : Number(numberOfItems),
     );
   }
 }
