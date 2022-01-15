@@ -6,8 +6,8 @@ import { DefaultModule } from './default/default.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/workshop-unit-tests'),
     DefaultModule,
-    MongooseModule.forRoot('mongodb://localhost/workshopUnitTests'),
   ],
   controllers: [AppController],
   providers: [AppService],
