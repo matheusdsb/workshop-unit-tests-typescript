@@ -70,7 +70,7 @@ export class GitHubUserService {
     filter: GithubUserFilter,
     totalItems: number,
   ): Promise<User[]> {
-    const maxAttempts = 50;
+    const maxAttempts = 30;
     let attempts = 0;
     let lastFoundId = 0;
     let currentPage = await this.list(lastFoundId + 1, 100);
@@ -81,7 +81,7 @@ export class GitHubUserService {
       currentPage.length > 0 &&
       attempts < maxAttempts
     ) {
-      lastFoundId = currentPage[currentPage.length - 1].id;
+      lastFoundId = currentPage[currentPage.length - 1].githubId;
       items.push(...this.filterList(currentPage, filter));
       await TimerHelper.sleep(1000);
       currentPage = await this.list(lastFoundId + 1, 100);
@@ -95,7 +95,7 @@ export class GitHubUserService {
     return githubUsers.map((g) => {
       const user = new User();
 
-      user.id = g.id;
+      user.githubId = g.id;
       user.avatar = g.avatar_url;
       user.login = g.login;
       user.isSiteAdmin = g.site_admin;
