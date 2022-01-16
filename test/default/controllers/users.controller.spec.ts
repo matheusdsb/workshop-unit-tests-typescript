@@ -12,10 +12,10 @@ const makeFakeUsers = (): User[] => {
   fakeItem1.isSiteAdmin = true;
 
   const fakeItem2 = new User();
-  fakeItem1.login = 'other_login';
-  fakeItem1.githubId = 2;
-  fakeItem1.avatar = 'other_avatar';
-  fakeItem1.isSiteAdmin = false;
+  fakeItem2.login = 'other_login';
+  fakeItem2.githubId = 2;
+  fakeItem2.avatar = 'other_avatar';
+  fakeItem2.isSiteAdmin = false;
 
   return [fakeItem1, fakeItem2];
 };
