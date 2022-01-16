@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User } from './models/user';
 import { UserSchema } from './models/user-schema';
 import { UserService } from './services/user.service';
+import { ImportService } from './services/import.service';
 
 dotenv.config();
 @Module({
@@ -17,6 +18,7 @@ dotenv.config();
   providers: [
     GitHubUserService,
     UserService,
+    ImportService,
     { provide: 'GITHUB_USERS_API', useValue: process.env.GITHUB_USERS_API },
   ],
 })
