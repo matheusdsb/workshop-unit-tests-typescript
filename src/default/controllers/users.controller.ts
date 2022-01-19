@@ -46,7 +46,9 @@ export class UsersController {
           isNaN(idGreaterThan) ? 0 : Number(idGreaterThan),
           isNaN(pageSize) ? 10 : Number(pageSize),
         );
-      return `total of ${importedItems} items imported successfully`;
+      return importedItems > 0
+        ? `total of ${importedItems} items imported successfully`
+        : 'No items found';
     } catch (error) {
       this.logger.error(error.message, error.stack);
       throw new InternalServerErrorException('An unexpected error occurred');
